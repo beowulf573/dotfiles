@@ -16,6 +16,14 @@
 ;; enable visual feedback on selections
 (setq transient-mark-mode t)
 
+;; left side line number
+(global-linum-mode t)
+
+;; save open files and place in file
+(custom-set-variables
+  '(desktop-enable t nil (desktop))
+  '(save-place t nil (saveplace)))
+
 ;; default to better frame titles
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))

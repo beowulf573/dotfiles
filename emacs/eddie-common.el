@@ -24,6 +24,12 @@
   '(desktop-enable t nil (desktop))
   '(save-place t nil (saveplace)))
 
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+
 ;; default to better frame titles
 (setq frame-title-format
       (concat  "%b - emacs@" (system-name)))

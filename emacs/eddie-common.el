@@ -9,6 +9,13 @@
 ;;(require 'go-mode-load)
 (provide 'eddie-common)
 
+(load "ggtags")
+
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))))
+
 ;; turn on font-lock mode
 (when (fboundp 'global-font-lock-mode)
   (global-font-lock-mode t))
@@ -42,7 +49,6 @@
 
 (global-set-key [f5] 'compile)
 (global-set-key [f6] 'find-grep-dired)
-(global-set-key [f4] 'svn-status)
 (global-set-key [f2] 'delete-trailing-whitespace)
 
 (setq-default tab-width 4)
@@ -50,6 +56,9 @@
 (line-number-mode t)    ; makes the line number show up
 (column-number-mode t)  ; makes the column number show up
 (tool-bar-mode nil)
+
+(setq c-default-style "k&r"
+          c-basic-offset 4)
 
 (add-hook 'python-mode-hook
 	  (lambda ()
@@ -131,4 +140,3 @@
           (shrink-window (- h 10)))))))
 (add-hook 'compilation-mode-hook 'my-compilation-hook)
 
-(tool-bar-mode -1)

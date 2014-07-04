@@ -46,7 +46,7 @@
 (global-set-key [f2] 'delete-trailing-whitespace)
 
 (setq-default tab-width 4)
-(setq indent-tabs-mode t)
+(setq-default indent-tabs-mode nil)
 (line-number-mode t)    ; makes the line number show up
 (column-number-mode t)  ; makes the column number show up
 (tool-bar-mode nil)

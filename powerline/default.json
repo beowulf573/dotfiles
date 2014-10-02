@@ -1,0 +1,18 @@
+{
+	"segment_data": {
+		"branch": {
+			"before": " "
+		}
+	},
+	"segments": {
+		"right": [
+			{
+				"function": "powerline.segments.common.vcs.branch",
+				"name" : "branch"
+			},
+			{
+				"function": "powerline.segments.common.net.hostname"
+			}
+		]
+	}
+}

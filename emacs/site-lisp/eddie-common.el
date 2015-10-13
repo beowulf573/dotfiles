@@ -4,11 +4,11 @@
 ;;(require 'xcscope)
 ;;(setq cscope-do-not-update-database t)
 ;;(setq cscope-initial-directory "~/bin")
-(require 'xgtags)
+(require 'ggtags)
 (add-hook 'c-mode-common-hook
 		  (lambda ()
 			(c-set-offset 'case-label '+)
-			(xgtags-mode 1)))
+			(ggtags-mode 1)))
 
 (defun gtags-root-dir ()
   "Returns GTAGS root directory or nil if doesn't exist."
@@ -31,7 +31,7 @@
 
 (defun gtags-update-hook()
   "Update GTAGS file incrementally upon saving a file"
-  (when xgtags-mode
+  (when ggtags-mode
 	(when (gtags-root-dir)
 	  (gtags-update-current-file))))
 

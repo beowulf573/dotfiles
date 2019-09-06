@@ -42,7 +42,7 @@ tmux_conf_new_session_prompt=false
 # RGB 24-bit colour support (tmux >= 2.2), possible values are:
 #  - true
 #  - false (default)
-tmux_conf_theme_24b_colour=false
+tmux_conf_theme_24b_colour=true
 
 # window style
 tmux_conf_theme_window_fg='default'
@@ -279,4 +279,5 @@ set -g status-bg default
 set -g mouse on
 bind-key -T copy-mode MouseDragEnd1Pane send -X copy-pipe-and-cancel "xclip -selection clipboard -i"
 bind-key -T copy-mode-vi MouseDragEnd1Pane send -X copy-pipe-and-cancel "xclip -selection clipboard -i"
+
 

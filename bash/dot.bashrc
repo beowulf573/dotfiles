@@ -118,14 +118,17 @@ fi
 
 umask 022
 
-export PATH="$HOME/esp/xtensa-esp32-elf/bin:$PATH"
+# below is local to each system
+
 export IDF_PATH="$HOME/esp/esp-idf"
 export PATH=$PATH:$IDF_PATH/tools
+. $IDF_PATH/export.sh
 
-export DISPLAY=:0.0
+export DISPLAY=127.0.0.1:0.0
 
 export MINICOM='-c on'
 
 export PATH=/opt/gcc-arm/bin:$PATH
+export M4PATH='.:~/texmf/tex/latex/Circuit_macros'
 
 eval $(/mnt/c/Util/weasel-pageant-1.3/weasel-pageant  -rb -a $HOME/.weasel-pageant.sock)

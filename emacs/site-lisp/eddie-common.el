@@ -1,5 +1,6 @@
 (provide 'eddie-common)
 
+(ac-config-default)
 
 ;;(require 'xcscope)
 ;;(setq cscope-do-not-update-database t)
@@ -14,44 +15,44 @@
   ;; If there is more than one, they won't work right.
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120))))
 
-(add-hook 'c-mode-common-hook
-		  (lambda ()
-			(c-set-offset 'case-label '+)
-			(ggtags-mode 1)))
+;; (add-hook 'c-mode-common-hook
+;; 		  (lambda ()
+;; 			(c-set-offset 'case-label '+)
+;; 			(ggtags-mode 1)))
 
-(defun gtags-root-dir ()
-  "Returns GTAGS root directory or nil if doesn't exist."
-  (with-temp-buffer
-	(if (zerop (call-process "global" nil t nil "-pr"))
-		(buffer-substring (point-min) (1- (point-max)))
-	  nil)))
+;; (defun gtags-root-dir ()
+;;   "Returns GTAGS root directory or nil if doesn't exist."
+;;   (with-temp-buffer
+;; 	(if (zerop (call-process "global" nil t nil "-pr"))
+;; 		(buffer-substring (point-min) (1- (point-max)))
+;; 	  nil)))
 
-(defun gtags-update-single(filename)  
-  "Update Gtags database for changes in a single file"
-  (interactive)
-  (start-process "update-gtags" "update-gtags" "bash" "-c" (concat "cd " (gtags-root-dir) " ; gtags --single-update " filename )))
+;; (defun gtags-update-single(filename)  
+;;   "Update Gtags database for changes in a single file"
+;;   (interactive)
+;;   (start-process "update-gtags" "update-gtags" "bash" "-c" (concat "cd " (gtags-root-dir) " ; gtags --single-update " filename )))
 
-(defun gtags-update-current-file()
-  (interactive)
-  (defvar filename)
-  (setq filename (replace-regexp-in-string (gtags-root-dir) "." (buffer-file-name (current-buffer))))
-  (gtags-update-single filename)
-  (message "Gtags updated for %s" filename))
+;; (defun gtags-update-current-file()
+;;   (interactive)
+;;   (defvar filename)
+;;   (setq filename (replace-regexp-in-string (gtags-root-dir) "." (buffer-file-name (current-buffer))))
+;;   (gtags-update-single filename)
+;;   (message "Gtags updated for %s" filename))
 
-(defun gtags-update-hook()
-  "Update GTAGS file incrementally upon saving a file"
-  (when ggtags-mode
-	(when (gtags-root-dir)
-	  (gtags-update-current-file))))
+;; (defun gtags-update-hook()
+;;   "Update GTAGS file incrementally upon saving a file"
+;;   (when ggtags-mode
+;; 	(when (gtags-root-dir)
+;; 	  (gtags-update-current-file))))
 
-(add-hook 'after-save-hook 'gtags-update-hook)
-
+;; (add-hook 'after-save-hook 'gtags-update-hook)
+ 
 ;(require 'company)
 ;(add-hook 'after-init-hook 'global-company-mode)
 
 (show-paren-mode 1)
 
-(require 'go-mode-load)
+;;''(require 'go-mode-load)
 ;; turn on font-lock mode
 (when (fboundp 'global-font-lock-mode)
   (global-font-lock-mode t))
@@ -152,7 +153,7 @@
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 ;;(require 'color-theme-solarized)
 ;;(load-theme 'solarized-dark t)
-(load-theme 'github t)
+;;(load-theme 'github t)
 ;;(require 'ecb-autoloads)
 ;;(setq ecb-tip-of-the-day nil)
 

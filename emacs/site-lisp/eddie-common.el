@@ -99,7 +99,7 @@
 (defun eddie-sign ()
   "spit out my name, email and the current time"
   (interactive)
-  (insert "-- Eddie McCreary <eddie.mccreary@hp.com>")
+  (insert "-- Eddie McCreary <eddie.mccreary@heorot.org>")
   (eddie-timestamp))
 
 (defun save-framegeometry ()

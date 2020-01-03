@@ -1,6 +1,6 @@
 (provide 'eddie-common)
 
-(ac-config-default)
+;; (ac-config-default)
 
 ;;(require 'xcscope)
 ;;(setq cscope-do-not-update-database t)
@@ -47,8 +47,8 @@
 
 ;; (add-hook 'after-save-hook 'gtags-update-hook)
  
-;(require 'company)
-;(add-hook 'after-init-hook 'global-company-mode)
+(require 'company)
+(add-hook 'after-init-hook 'global-company-mode)
 
 (show-paren-mode 1)
 

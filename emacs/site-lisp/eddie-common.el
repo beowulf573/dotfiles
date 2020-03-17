@@ -49,7 +49,8 @@ There are two things you can do about this warning:
 
 ;; (ac-config-default)
 
-;;(require 'xcscope)
+(require 'xcscope)
+(cscope-setup)
 ;;(setq cscope-do-not-update-database t)
 ;;(setq cscope-initial-directory "~/bin")
 ;(require 'ggtags)

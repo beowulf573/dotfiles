@@ -26,20 +26,27 @@ There are two things you can do about this warning:
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(require 'mk-project)
+;; (require 'mk-project)
 
-(global-set-key (kbd "C-c p c") 'project-compile)
-(global-set-key (kbd "C-c p l") 'project-load)
-(global-set-key (kbd "C-c p a") 'project-ack)
-(global-set-key (kbd "C-c p g") 'project-grep)
-(global-set-key (kbd "C-c p o") 'project-multi-occur)
-(global-set-key (kbd "C-c p u") 'project-unload)
-(global-set-key (kbd "C-c p f") 'project-find-file) ; or project-find-file-ido
-(global-set-key (kbd "C-c p i") 'project-index)
-(global-set-key (kbd "C-c p s") 'project-status)
-(global-set-key (kbd "C-c p h") 'project-home)
-(global-set-key (kbd "C-c p d") 'project-dired)
-(global-set-key (kbd "C-c p t") 'project-tags)
+;; (global-set-key (kbd "C-c p c") 'project-compile)
+;; (global-set-key (kbd "C-c p l") 'project-load)
+;; (global-set-key (kbd "C-c p a") 'project-ack)
+;; (global-set-key (kbd "C-c p g") 'project-grep)
+;; (global-set-key (kbd "C-c p o") 'project-multi-occur)
+;; (global-set-key (kbd "C-c p u") 'project-unload)
+;; (global-set-key (kbd "C-c p f") 'project-find-file) ; or project-find-file-ido
+;; (global-set-key (kbd "C-c p i") 'project-index)
+;; (global-set-key (kbd "C-c p s") 'project-status)
+;; (global-set-key (kbd "C-c p h") 'project-home)
+;; (global-set-key (kbd "C-c p d") 'project-dired)
+;; (global-set-key (kbd "C-c p t") 'project-tags)
+
+;; add project directory in common
+;; (setq projectile-project-search-path '("~/projects/"e))
+(require 'projectile)
+(define-key projectile-mode-map (kbd "s-p") 'projectile-command-map)
+(define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
+(projectile-mode +1)
 
 (load-theme 'nord t)
 (set-face-attribute 'font-lock-comment-face nil
@@ -75,7 +82,7 @@ There are two things you can do about this warning:
 ;; 		(buffer-substring (point-min) (1- (point-max)))
 ;; 	  nil)))
 
-;; (defun gtags-update-single(filename)  
+s;; (defun gtags-update-single(filename)
 ;;   "Update Gtags database for changes in a single file"
 ;;   (interactive)
 ;;   (start-process "update-gtags" "update-gtags" "bash" "-c" (concat "cd " (gtags-root-dir) " ; gtags --single-update " filename )))
@@ -94,9 +101,11 @@ There are two things you can do about this warning:
 ;; 	  (gtags-update-current-file))))
 
 ;; (add-hook 'after-save-hook 'gtags-update-hook)
- 
+
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+
+(require 'subr-x)
 
 (show-paren-mode 1)
 

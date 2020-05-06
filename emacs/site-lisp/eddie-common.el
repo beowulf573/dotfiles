@@ -82,7 +82,7 @@ There are two things you can do about this warning:
 ;; 		(buffer-substring (point-min) (1- (point-max)))
 ;; 	  nil)))
 
-s;; (defun gtags-update-single(filename)
+;; (defun gtags-update-single(filename)
 ;;   "Update Gtags database for changes in a single file"
 ;;   (interactive)
 ;;   (start-process "update-gtags" "update-gtags" "bash" "-c" (concat "cd " (gtags-root-dir) " ; gtags --single-update " filename )))

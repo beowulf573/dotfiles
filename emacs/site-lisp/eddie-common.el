@@ -26,8 +26,8 @@ There are two things you can do about this warning:
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
-(require 'xcscope)
-(cscope-setup)
+;;(require 'xcscope)
+;;(cscope-setup)
 
 ;; add project directory in common
 ;; (setq projectile-project-search-path '("~/projects/"e))
@@ -36,22 +36,27 @@ There are two things you can do about this warning:
 (define-key projectile-mode-map (kbd "C-c p") 'projectile-command-map)
 (projectile-mode +1)
 (setq projectile-completion-system 'ivy)
+(setq projectile-tags-backend 'ggtags)
+(add-hook 'c-mode-common-hook
+          (lambda ()
+            (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
+              (ggtags-mode 1))))
 
 ;;
 ;; function to set cscope dir to project root, run list, run index, bind to keybindings
 ;; TODO: add else message
-(defun eddie-projectile-index ()
-  "set cscope direct and index"
-  (interactive)
-  (if (projectile-project-root)
-      (progn
-         (setq cscope-initial-directory (projectile-project-root))
-         (cscope-index-files (projectile-project-root))
-         )
-    (message "projectile root is nil")
-    )
-)
-(global-set-key (kbd "C-c j") 'eddie-projectile-index)
+;;(defun eddie-projectile-index ()
+;;  "set cscope direct and index"
+;;  (interactive)
+;;  (if (projectile-project-root)
+;;      (progn
+;;         (setq cscope-initial-directory (projectile-project-root))
+;;         (cscope-index-files (projectile-project-root))
+;;         )
+;;    (message "projectile root is nil")
+;;   )
+;;)
+;;(global-set-key (kbd "C-c j") 'eddie-projectile-index)
 
 (load-theme 'nord t)
 (set-face-attribute 'font-lock-comment-face nil
@@ -70,6 +75,14 @@ There are two things you can do about this warning:
 
 (require 'company)
 (add-hook 'after-init-hook 'global-company-mode)
+(setq company-backends
+      '((company-files          ; files & directory
+         company-keywords       ; keywords
+         company-capf
+         company-yasnippet
+         )
+        (company-abbrev company-dabbrev)
+        ))
 
 (require 'subr-x)
 

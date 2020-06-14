@@ -26,6 +26,9 @@ There are two things you can do about this warning:
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
+(require 'xcscope)
+(cscope-setup)
+
 ;; add project directory in common
 ;; (setq projectile-project-search-path '("~/projects/"e))
 (require 'projectile)
@@ -34,15 +37,28 @@ There are two things you can do about this warning:
 (projectile-mode +1)
 (setq projectile-completion-system 'ivy)
 
+;;
+;; function to set cscope dir to project root, run list, run index, bind to keybindings
+;; TODO: add else message
+(defun eddie-projectile-index ()
+  "set cscope direct and index"
+  (interactive)
+  (if (projectile-project-root)
+      (progn
+         (setq cscope-initial-directory (projectile-project-root))
+         (cscope-index-files (projectile-project-root))
+         )
+    (message "projectile root is nil")
+    )
+)
+(global-set-key (kbd "C-c j") 'eddie-projectile-index)
+
 (load-theme 'nord t)
 (set-face-attribute 'font-lock-comment-face nil
                       :foreground "#81A1C1") ; nord9
 (set-face-attribute 'vertical-border nil
 	                      :foreground "#EBCB8B") ; nord13
 
-
-(require 'xcscope)
-(cscope-setup)
 (setq-default indent-tabs-mode nil)
 (setq-default tab-width 4)
 (custom-set-variables

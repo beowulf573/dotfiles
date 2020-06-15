@@ -104,11 +104,9 @@ There are two things you can do about this warning:
 (setq diff-switches "-u")
 
 ;; always end a file with a newline
-(setq require-final-newline 'query)
+(setq require-final-newline 'nil)
 
-(global-set-key [f5] 'compile)
 (global-set-key [f6] 'find-grep-dired)
-(global-set-key [f4] 'svn-status)
 (global-set-key [f2] 'delete-trailing-whitespace)
 
 (setq-default tab-width 4)
@@ -169,31 +167,7 @@ There are two things you can do about this warning:
       (load-file framegeometry-file)))
   )
 
-;; (add-to-list 'load-path "~/.emacs.d/themes")
-
-(defun my-compilation-hook ()
-  (when (not (get-buffer-window "*compilation*"))
-    (save-selected-window
-      (save-excursion
-        (let* ((w (split-window-vertically))
-               (h (window-height w)))
-          (select-window w)
-          (switch-to-buffer "*compilation*")
-          (shrink-window (- h 10)))))))
-(add-hook 'compilation-mode-hook 'my-compilation-hook)
-
 (tool-bar-mode -1)
-
-(defvar my-keys-minor-mode-map (make-keymap) "my-keys-minor-mode keymap.")
-
-(define-key my-keys-minor-mode-map (kbd "\M-<") 'beginning-of-buffer)
-(define-key my-keys-minor-mode-map (kbd "\M->") 'end-of-buffer)
-
-(define-minor-mode my-keys-minor-mode
-  "A minor mode so that my key settings override annoying major modes."
-  t " my-keys" 'my-keys-minor-mode-map)
-
-(my-keys-minor-mode 1)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

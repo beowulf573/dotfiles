@@ -91,8 +91,8 @@ fi
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
-alias te="eval $(tmux showenv -s)"
-alias tm="tmux a"
+alias te='eval $(tmux showenv -s)'
+alias tm="tmux attach || tmux new"
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -131,6 +131,6 @@ export DISPLAY=127.0.0.1:0.0
 export MINICOM='-c on'
 
 export PATH=/opt/gcc-arm/bin:$PATH
-export M4PATH='.:~/texmf/tex/latex/Circuit_macros'
 
-eval $(/mnt/c/Util/weasel-pageant-1.3/weasel-pageant  -rb -a $HOME/.weasel-pageant.sock)
+export SSH_AUTH_SOCK=/mnt/c/Users/eddie/ssh-agent.sock
+

@@ -93,6 +93,7 @@ alias la='ls -A'
 alias l='ls -CF'
 alias te='eval $(tmux showenv -s)'
 alias tm="tmux attach || tmux new"
+alias ww='curl wttr.in/iah'
 
 # Add an "alert" alias for long running commands.  Use like so:
 #   sleep 10; alert
@@ -126,7 +127,15 @@ export IDF_PATH="$HOME/esp/esp-idf"
 export PATH=$PATH:$IDF_PATH/tools
 . $IDF_PATH/export.sh
 
-export DISPLAY=127.0.0.1:0.0
+# TODO: check if WSL and only set then
+export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
+if [ "$WLS_VERSION" -eq "2" ] ; then
+	export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
+	export DISPLAY=$WSL_HOST:0.0
+else
+	export DISPLAY=127.0.0.1:0.0
+fi
+
 
 export MINICOM='-c on'
 

@@ -129,7 +129,7 @@ export PATH=$PATH:$IDF_PATH/tools
 
 # TODO: check if WSL and only set then
 export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
-if [ "$WLS_VERSION" -eq "2" ] ; then
+if [ "$WSL_VERSION" -eq "2" ] ; then
 	export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
 	export DISPLAY=$WSL_HOST:0.0
 else

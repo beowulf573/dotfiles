@@ -26,6 +26,8 @@ There are two things you can do about this warning:
     (add-to-list 'package-archives (cons "gnu" (concat proto "://elpa.gnu.org/packages/")))))
 (package-initialize)
 
+(ivy-mode 1)
+(require 'magit)
 ;;(require 'xcscope)
 ;;(cscope-setup)
 
@@ -41,6 +43,10 @@ There are two things you can do about this warning:
           (lambda ()
             (when (derived-mode-p 'c-mode 'c++-mode 'java-mode)
               (ggtags-mode 1))))
+
+(projectile-register-project-type 'esp32 '("sdkconfig" "main" "components")
+                                  :project-file "sdkconfig"
+				                  :compile "idf.py build")
 
 ;;
 ;; function to set cscope dir to project root, run list, run index, bind to keybindings

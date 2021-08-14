@@ -121,13 +121,12 @@ fi
 
 umask 022
 
-# below is local to each system
+if [ -d "$HOME/esp/esp-idf" ] ; then
+	export IDF_PATH="$HOME/esp/esp-idf"
+	export PATH=$PATH:$IDF_PATH/tools
+	. $IDF_PATH/export.sh
+fi
 
-export IDF_PATH="$HOME/esp/esp-idf"
-export PATH=$PATH:$IDF_PATH/tools
-. $IDF_PATH/export.sh
-
-# TODO: check if WSL and only set then
 export WSL_VERSION=$(wsl.exe -l -v | grep -a '[*]' | sed 's/[^0-9]*//g')
 if [ "$WSL_VERSION" -eq "2" ] ; then
 	export WSL_HOST=$(tail -1 /etc/resolv.conf | cut -d' ' -f2)
@@ -139,14 +138,16 @@ fi
 
 export MINICOM='-c on'
 
-export PATH=/opt/gcc-arm/bin:$PATH
+if [ -d "/opt/gcc-arm/bin" ] ; then
+	export PATH=/opt/gcc-arm/bin:$PATH
+fi
 
-#export SSH_AUTH_SOCK=/mnt/c/Users/eddie/ssh-agent.sock
-
-export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
-ss -a | grep -q $SSH_AUTH_SOCK
-if [ $? -ne 0   ]; then
-    rm -f $SSH_AUTH_SOCK
-    ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/Users/eddie/go/bin/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+if [ -f "/mnt/c/Users/eddie/go/bin/npiperelay.exe" ] ; then
+	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+	ss -a | grep -q $SSH_AUTH_SOCK
+	if [ $? -ne 0   ]; then
+	    rm -f $SSH_AUTH_SOCK
+	    ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/Users/eddie/go/bin/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
+	fi
 fi
 

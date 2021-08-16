@@ -142,6 +142,7 @@ if [ -d "/opt/gcc-arm/bin" ] ; then
 	export PATH=/opt/gcc-arm/bin:$PATH
 fi
 
+# TODO: use env to set path, only enable if set
 if [ -f "/mnt/c/Users/eddie/go/bin/npiperelay.exe" ] ; then
 	export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
 	ss -a | grep -q $SSH_AUTH_SOCK
@@ -150,4 +151,6 @@ if [ -f "/mnt/c/Users/eddie/go/bin/npiperelay.exe" ] ; then
 	    ( setsid socat UNIX-LISTEN:$SSH_AUTH_SOCK,fork EXEC:"/mnt/c/Users/eddie/go/bin/npiperelay.exe -ei -s //./pipe/openssh-ssh-agent",nofork & ) >/dev/null 2>&1
 	fi
 fi
+
+[ -n ${WSL_AUTH_SOCK} ] && export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
 

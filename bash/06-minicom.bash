@@ -1,0 +1,2 @@
+
+export MINICOM='-c on'

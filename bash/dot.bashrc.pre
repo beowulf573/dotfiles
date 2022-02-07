@@ -1,0 +1,5 @@
+#
+# where we store files
+export RC_DIR="$HOME/.rc.files"
+export EM_WIN_HOME="/mnt/c/Users/eddie"
+

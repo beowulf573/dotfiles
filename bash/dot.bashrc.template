@@ -1,0 +1,11 @@
+if [ -f "$HOME/.bashrc.pre" ]; then
+	source ~/.bashrc.pre
+fi
+
+for file in $(< $RC_DIR/bash/rcfiles); do
+    source $file
+done
+
+if [ -f "$HOME/.basrc.post" ]; then
+	source ~/.bashrc.post
+fi

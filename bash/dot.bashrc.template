@@ -2,8 +2,9 @@ if [ -f "$HOME/.bashrc.pre" ]; then
 	source ~/.bashrc.pre
 fi
 
-for file in $(< $RC_DIR/bash); do
-    source $file
+readarray -d '' files < <(printf '%s\0' $RC_DIR/bash/*.bash | sort -zV)
+for f in "${files[@]}"; do
+	source $f
 done
 
 if [ -f "$HOME/.basrc.post" ]; then
